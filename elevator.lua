@@ -57,7 +57,7 @@ while true do
 
         elseif currFloor == 1 then
             if rs.getInput(upIn) then
-                moveFor(1.3, true) -- up
+                moveFor(1.1, true) -- up
                 currFloor = 2
             elseif rs.getInput(downIn) then
                 moveFor(2.5, false) -- down
