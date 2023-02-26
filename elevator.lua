@@ -24,6 +24,13 @@ local function reset()
     setMoving(false)
 end
 
+local function moveFor(time, direction)
+    setDirection(direction)
+    setMoving(true)
+    sleep(time)
+    setMoving(false)
+end
+
 print("Starting elevator")
 
 print("Resetting...")
@@ -31,8 +38,6 @@ print("Resetting...")
 reset()
 
 print("Reset complete")
-
-
 
 while true do
     os.pullEvent("redstone")
@@ -46,48 +51,30 @@ while true do
 
         if currFloor == 0 then
             if rs.getInput(upIn) then
-                setDirection(true)
-                setMoving(true)
-                sleep(2.5)
-                setMoving(false)
+                moveFor(2.5, true)
                 currFloor = 1
             end
 
         elseif currFloor == 1 then
             if rs.getInput(upIn) then
-                setDirection(true) -- up
-                setMoving(true)
-                sleep(1.3)
-                setMoving(false)
+                moveFor(1.3, true) -- up
                 currFloor = 2
             elseif rs.getInput(downIn) then
-                setDirection(false) -- down
-                setMoving(true)
-                sleep(2.5)
-                setMoving(false)
+                moveFor(2.5, false) -- down
                 currFloor = 0
             end
 
         elseif currFloor == 2 then
             if rs.getInput(upIn) then
-                setDirection(true) -- up
-                setMoving(true)
-                sleep(1.5)
-                setMoving(false)
+                moveFor(1.5, true) -- up
                 currFloor = 3
             elseif rs.getInput(downIn) then
-                setDirection(false) -- down
-                setMoving(true)
-                sleep(1.1)
-                setMoving(false)
+                moveFor(1.1, false) -- down
                 currFloor = 1
             end
         elseif currFloor == 3 then
             if rs.getInput(downIn) then
-                setDirection(false) -- down
-                setMoving(true)
-                sleep(1.3)
-                setMoving(false)
+                moveFor(1.3, false) -- down
                 currFloor = 2
             end
         end
